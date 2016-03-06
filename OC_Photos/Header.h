@@ -10,4 +10,7 @@
 #define Header_h
 
 
+#define WIDTH  [UIScreen mainScreen].bounds.size.width
+#define HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #endif /* Header_h */

@@ -7,30 +7,29 @@
 //
 
 #import "AlbumCollectionViewController.h"
+#import "PhotoCollectionViewCell.h"
 
-@interface AlbumCollectionViewController ()
+@interface AlbumCollectionViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@property (strong, nonatomic) PHCachingImageManager * imageManager;
 
 @end
 
 @implementation AlbumCollectionViewController
 
 static NSString * const reuseIdentifier = @"Cell";
+static CGSize photoCellSize;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.imageManager = [[PHCachingImageManager alloc] init];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.
+    self.collectionView.collectionViewLayout = layout;
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGSize cellSize = ((UICollectionViewFlowLayout *)self.collectionViewLayout).itemSize;
+    photoCellSize = CGSizeMake(cellSize.width * scale, cellSize.height * scale);
 }
 
 /*
@@ -46,25 +45,40 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+    return self.fetchResult.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    PhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    PHAsset * asset = self.fetchResult[indexPath.item];
     
-    // Configure the cell
     
+    [self.imageManager requestImageForAsset:asset targetSize:photoCellSize contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        cell.image = result;
+    }];
+    
+    
+    cell.backgroundColor = [UIColor yellowColor];
     return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat w = (WIDTH - 50) / 4;
+    return CGSizeMake(w, w);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+}
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

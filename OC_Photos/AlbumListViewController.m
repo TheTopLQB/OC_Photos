@@ -7,31 +7,58 @@
 //
 
 #import "AlbumListViewController.h"
+#import <Photos/Photos.h>
+#import "AlbumCollectionViewController.h"
 
-@interface AlbumListViewController ()
+@interface AlbumListViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) NSArray * fetchResults;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation AlbumListViewController
 
+static NSString * const cellReuseIdentifier = @"albumCellReuseIdentifier";
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellReuseIdentifier];
+    PHFetchOptions * options = [[PHFetchOptions alloc] init];
+    PHFetchResult * result = [PHAsset fetchAssetsWithOptions:options];
+    self.fetchResults = @[result];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.fetchResults.count;
 }
 
-/*
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellReuseIdentifier forIndexPath:indexPath];
+    cell.textLabel.text = @"所有照片";
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self performSegueWithIdentifier:cellReuseIdentifier sender:self.fetchResults[0]];
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:cellReuseIdentifier]) {
+        PHFetchResult * fetchReult = (PHFetchResult *)sender;
+        AlbumCollectionViewController * albumCollectionVC = segue.destinationViewController;
+        albumCollectionVC.fetchResult = fetchReult;
+    }
 }
-*/
+
 
 @end

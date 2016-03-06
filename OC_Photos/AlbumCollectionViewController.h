@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 
 @interface AlbumCollectionViewController : UICollectionViewController
+@property (strong, nonatomic) PHFetchResult * fetchResult;
 
 @end

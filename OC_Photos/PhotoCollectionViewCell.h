@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PhotoCollectionViewCell : UICollectionViewCell
+@property (strong, nonatomic) UIImage * image;
 
 @end
