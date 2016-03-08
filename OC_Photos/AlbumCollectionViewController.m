@@ -8,6 +8,7 @@
 
 #import "AlbumCollectionViewController.h"
 #import "PhotoCollectionViewCell.h"
+#import "BigPhotoViewController.h"
 
 @interface AlbumCollectionViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) PHCachingImageManager * imageManager;
@@ -57,7 +58,6 @@ static CGSize photoCellSize;
     PhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     PHAsset * asset = self.fetchResult[indexPath.item];
     
-    
     [self.imageManager requestImageForAsset:asset targetSize:photoCellSize contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         cell.image = result;
     }];
@@ -68,6 +68,12 @@ static CGSize photoCellSize;
 }
 
 #pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    BigPhotoViewController * bigPhotoVC = [[BigPhotoViewController alloc] init];
+    bigPhotoVC.asset = self.fetchResult[indexPath.item];
+    [self.navigationController pushViewController:bigPhotoVC animated:YES];
+}
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 

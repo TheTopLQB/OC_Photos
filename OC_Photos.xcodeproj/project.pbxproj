@@ -17,6 +17,7 @@
 		9F656EE71C8BC2C900D27A97 /* AlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F656EE61C8BC2C900D27A97 /* AlbumListViewController.m */; };
 		9F656EEA1C8BD61C00D27A97 /* AlbumCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F656EE91C8BD61C00D27A97 /* AlbumCollectionViewController.m */; };
 		9F656F331C8BF3EC00D27A97 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F656F321C8BF3EC00D27A97 /* PhotoCollectionViewCell.m */; };
+		9F674C701C8EB46300D77976 /* BigPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F674C6F1C8EB46300D77976 /* BigPhotoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		9F656F301C8BEDD600D27A97 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		9F656F311C8BF3EC00D27A97 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		9F656F321C8BF3EC00D27A97 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		9F674C6E1C8EB46300D77976 /* BigPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigPhotoViewController.h; sourceTree = "<group>"; };
+		9F674C6F1C8EB46300D77976 /* BigPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigPhotoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				9F656EE61C8BC2C900D27A97 /* AlbumListViewController.m */,
 				9F656EE81C8BD61C00D27A97 /* AlbumCollectionViewController.h */,
 				9F656EE91C8BD61C00D27A97 /* AlbumCollectionViewController.m */,
+				9F674C6E1C8EB46300D77976 /* BigPhotoViewController.h */,
+				9F674C6F1C8EB46300D77976 /* BigPhotoViewController.m */,
 				9F656F311C8BF3EC00D27A97 /* PhotoCollectionViewCell.h */,
 				9F656F321C8BF3EC00D27A97 /* PhotoCollectionViewCell.m */,
 				9F656F301C8BEDD600D27A97 /* Header.h */,
@@ -282,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F674C701C8EB46300D77976 /* BigPhotoViewController.m in Sources */,
 				9F656EE71C8BC2C900D27A97 /* AlbumListViewController.m in Sources */,
 				9F656E7D1C8BC20A00D27A97 /* AppDelegate.m in Sources */,
 				9F656EEA1C8BD61C00D27A97 /* AlbumCollectionViewController.m in Sources */,
